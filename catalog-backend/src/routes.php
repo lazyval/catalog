@@ -3,12 +3,13 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-// Routes
+$app->get('/', function (Request $request, Response $response, array $args) {
+  return $this->renderer->render($response, 'index.phtml', $args);
+});
 
-$app->get('/[{name}]', function (Request $request, Response $response, array $args) {
-    // Sample log message
-    $this->logger->info("Slim-Skeleton '/' route");
-
-    // Render index view
-    return $this->renderer->render($response, 'index.phtml', $args);
+$app->get('/products', function (Request $request, Response $response, array $args) {
+  $this->logger->debug("Serving products from json file (yes, it's dumb for now)");
+  $json_file = dirname(__FILE__).'/data.json';
+  readfile($json_file);
+  return $response->withHeader('Content-type', 'application/json');
 });
