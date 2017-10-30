@@ -7,7 +7,8 @@ var app = new Vue({
     products: [],
     resource_url: 'http://localhost:8080/products',
     loading: false,
-    currentlyEdited: null
+    currentlyEdited: null,
+    beforeEditCache: ''
   },
   created: function() {
     this.load();
@@ -42,7 +43,7 @@ var app = new Vue({
           this.load()
       }
     },
-    editName: function(product) {
+    editProduct: function(product) {
       this.beforeEditCache = product.name;
       this.currentlyEdited = product;
     },
@@ -50,11 +51,19 @@ var app = new Vue({
       if (!this.currentlyEdited) {
         return
       }
-
-      product.title = product.title.trim();
-      if (!product.title) {
+      this.currentlyEdited = null;
+      product.name = product.name.trim();
+      if (!product.name) {
         this.removeProduct();
       }
+    },
+    cancelEdit: function(product) {
+      if (!this.currentlyEdited) {
+        return
+      }
+      this.currentlyEdited = null;
+
+      product.name = this.beforeEditCache
     }
   }
 })

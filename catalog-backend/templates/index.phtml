@@ -13,16 +13,18 @@
         <div id="cadabra">
           <div class="list_container" @scroll="onScroll">
             <ul class="list">
-              <li class="list_item" v-for="p in products">
-                <input class="item-name"
-                  v-model="p.name"
-                  @dblclick="editName(p)"
-                  :class="{editing: currentlyEdited == p}"
-                  type="text"></input>
-                <br>
-                ${{p.price}}
-                <br>
-                <div class="item-description">{{p.description}}</div>
+              <li v-for="p in products"
+                 class="list_item"
+                 :key="p.id"
+                 :class="{editing: currentlyEdited == p}">
+                 <div class="view" v-if="p != currentlyEdited">
+                   <label @dblclick="editProduct(p)">{{p.name}}</label>
+                   <button class="destroy" @click="removeProduct(p)"></button>
+                 </div>
+                 <input class="edit" type="text" v-else v-model="p.name"
+                  @blur="doneEdit(p)"
+                  @keyup.enter="doneEdit(p)"
+                  @keyup.esc="cancelEdit(p)">
                 </li>
             </ul>
           </div>
