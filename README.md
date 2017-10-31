@@ -18,7 +18,7 @@ Stack:
 
 # plan
 
-- [ ] Build a memory only catalog on top of Slim framework (use it as baseline) 
+- [x] Build a memory only catalog on top of Slim framework (use it as baseline) 
 - [ ] Make it deployeable to Heroku (free tier)
 - [ ] *Optional* use Travis as CI service
 - [ ] Measure baseline performance
