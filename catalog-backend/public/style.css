@@ -34,6 +34,7 @@ h1 {
   flex-direction: column;
   background: rgba(221,221,221,0.5);
   height: 100vh;
+  overflow: scroll;
 }
 
 list-container {

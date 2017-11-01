@@ -10,8 +10,8 @@
     <body>
         <h1>Cadabra, Inc</h1>
         <div id="description">products catalog</div>
-        <div id="cadabra">
-          <div class="list_container" @scroll="onScroll">
+        <div id="cadabra" @scroll="onScroll">
+          <div class="list_container">
             <ul class="list">
               <li v-for="p in products"
                  class="list_item"
