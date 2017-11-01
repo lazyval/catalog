@@ -33,7 +33,7 @@ function query_products($data, $offset, $limit, $order, $order_by) {
 }
 
 $app->get('/products', function (Request $request, $response, $args) {
-  $json_file = dirname(__FILE__).'/data.json';
+  $json_file = dirname(__FILE__).'/data.json.dont_track';
   $this->logger->debug("Serving products from json file (yes, it's dumb for now)");
 
   $offset = intval($request->getQueryParam('offset', $default = '0'));

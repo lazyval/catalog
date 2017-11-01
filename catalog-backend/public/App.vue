@@ -5,7 +5,7 @@ var app = new Vue({
   el: "#cadabra",
   data: {
     products: [],
-    resource_url: 'http://localhost:8080/products',
+    resource_url: 'http://localhost:8080/products?limit=10',
     loading: false,
     currentlyEdited: null,
     beforeEditCache: ''
@@ -14,20 +14,6 @@ var app = new Vue({
     this.load();
   },
   methods: {
-    load: function() {
-      this.loading = true;
-      this.$http.get(this.resource_url).then(function(response) {
-        var json = response.data,
-          products = json.data
-
-          this.products = this.products.concat(products);
-          this.resource_url = json.next_page_url;
-          this.loading = false;
-      }, function(error) {
-        console.log(error)
-        this.loading = false;
-      })
-    },
     onScroll: function(event) {
       var container = event.target,
         list = container.firstElementChild;
@@ -41,7 +27,21 @@ var app = new Vue({
 
       if (!this.loading && reachedBottom) {
           this.load()
-      }
+        }
+    },
+    load: function() {
+      this.loading = true;
+      this.$http.get(this.resource_url).then(function(response) {
+        var json = response.data,
+          products = json.data
+
+          this.products = this.products.concat(products);
+          this.resource_url = json.next_page;
+          this.loading = false;
+      }, function(error) {
+        console.log(error)
+        this.loading = false;
+      })
     },
     editProduct: function(product) {
       this.beforeEditCache = product.name;
