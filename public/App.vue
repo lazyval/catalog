@@ -5,7 +5,7 @@ var app = new Vue({
   el: "#cadabra",
   data: {
     products: [],
-    resource_url: 'http://localhost:8080/products?limit=10',
+    resource_url: '/products?limit=10',
     loading: false,
     currentlyEdited: null,
     beforeEditCache: ''
