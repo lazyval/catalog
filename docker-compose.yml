@@ -3,16 +3,35 @@ version: '2'
 volumes:
     logs:
         driver: local
+    catalog_data:
+
+
+# docker-php-ext-install pdo_mysql
 
 services:
     slim:
-        image: php:7-alpine
+        build:
+          dockerfile: Dockerfile
+          context: .
         working_dir: /var/www
         command: php -S 0.0.0.0:8080 -t public public/index.php
         environment:
             docker: "true"
+            DATABASE_URL: "mysql:host=mysql;dbname=products"
+            DATABASE_USER: "root"
+            DATABASE_PWD: ""
         ports:
             - 8080:8080
         volumes:
             - .:/var/www
             - logs:/var/www/logs
+
+    mysql:
+        image: mysql:8
+        environment:
+          MYSQL_DATABASE: products
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+        ports:
+             - 3603:3603
+        volumes:
+            - ./catalog_data:/docker-entrypoint-initdb.d
