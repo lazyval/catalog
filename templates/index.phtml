@@ -8,23 +8,30 @@
 
     </head>
     <body>
-        <h1>Cadabra, Inc</h1>
-        <div id="description">products catalog</div>
         <div id="cadabra" @scroll="onScroll">
+          <div class="toolbar">
+            <ul class="sorting_tabs">
+              <li class="sorting_tab"
+                  v-for="method in listingMethods"
+                  @click="selectOrdering(method)"
+                  :class="{active: method.name == selectedOrdering}">{{method.text}}</li>
+            </ul>
+          </div>
           <div class="list_container">
-            <ul class="list">
+            <ul class="product_list">
               <li v-for="p in products"
                  class="list_item"
                  :key="p.id"
                  :class="{editing: currentlyEdited == p}">
                  <div class="view" v-if="p != currentlyEdited">
-                   <label @dblclick="editProduct(p)">{{p.name}}</label>
-                   <button class="destroy" @click="removeProduct(p)"></button>
+                   <label class="name" @dblclick="editProduct(p)">{{p.name}}</label>
+                   <button class="destroy">x</button>
                  </div>
                  <input class="edit" type="text" v-else v-model="p.name"
                   @blur="doneEdit(p)"
                   @keyup.enter="doneEdit(p)"
-                  @keyup.esc="cancelEdit(p)">
+                  @keyup.esc="cancelEdit(p)"/>
+                  <img :src=p.image_url class="product_image">
                   <div class="description-view">{{p.description}}</div>
                 </li>
             </ul>

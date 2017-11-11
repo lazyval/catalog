@@ -8,7 +8,12 @@ var app = new Vue({
     resource_url: '/products?limit=10',
     loading: false,
     currentlyEdited: null,
-    beforeEditCache: ''
+    beforeEditCache: '',
+    listingMethods: [
+      {name: "id", text: "sort by id"},
+      {name: "price", text: "sort by price"},
+    ],
+    selectedOrdering: "id"
   },
   created: function() {
     this.load();
@@ -42,6 +47,12 @@ var app = new Vue({
         console.log(error)
         this.loading = false;
       })
+    },
+    selectOrdering: function(method) {
+      this.selectedOrdering = method.name;
+      this.products = [];
+      this.resource_url = '/products?limit=10&order_by=' + method.name;
+      this.load();
     },
     editProduct: function(product) {
       this.beforeEditCache = product.name;
