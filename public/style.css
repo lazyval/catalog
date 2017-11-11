@@ -45,8 +45,11 @@ li.sorting_tab.active {
   border-bottom: 2px solid #6387ac;
 }
 
-li.sorting_tab.non_active {
-  color: #000;
+li.sorting_tab:not(.active) {
+  color: #656565;
+}
+
+li.sorting_tab:not(.active):hover {
   border-bottom: 2px solid #cad2db;
 }
 

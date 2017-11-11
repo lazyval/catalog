@@ -11,8 +11,10 @@
         <div id="cadabra" @scroll="onScroll">
           <div class="toolbar">
             <ul class="sorting_tabs">
-              <li class="sorting_tab active" id="id_sort">sort by id</li>
-              <li class="sorting_tab non_active" id="price_sort">sort by price</li>
+              <li class="sorting_tab"
+                  v-for="method in listingMethods"
+                  @click="selectOrdering(method)"
+                  :class="{active: method.name == selectedOrdering}">{{method.text}}</li>
             </ul>
           </div>
           <div class="list_container">
