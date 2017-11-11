@@ -25,6 +25,7 @@
                   @blur="doneEdit(p)"
                   @keyup.enter="doneEdit(p)"
                   @keyup.esc="cancelEdit(p)">
+                  <img :src=p.image_url class="product_image">
                   <div class="description-view">{{p.description}}</div>
                 </li>
             </ul>
