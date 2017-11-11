@@ -31,11 +31,12 @@ $app->get('/products', function (Request $request, $response, $args) {
           ->select()
           ->from('product_listing')
           ->limit($limit, $offset)
+          ->orderBy($order_by, $order)
           ->execute();
 
   $result = array(
     'data' => $stmt->fetchAll(),
-    'next_page' => ('/products?offset=' . ($offset + $limit) . "&limit=" . $limit)
+    'next_page' => ('/products?offset=' . ($offset + $limit) . "&limit=" . $limit . "&order_by=" . $order_by . "&order=" . $order)
   );
 
   return $response->withJson($result);
