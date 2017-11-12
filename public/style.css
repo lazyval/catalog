@@ -40,7 +40,6 @@ li.sorting_tab {
 }
 
 li.sorting_tab.active {
-  margin: auto;
   color: #000;
   border-bottom: 2px solid #6387ac;
 }
