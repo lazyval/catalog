@@ -1,37 +1,9 @@
 Vue.config.performance = true
 
-Vue.component('editable-field', {
-  template: '#editable-field',
-  props: ['product'],
-  data: function() {
-    return { beforeEditCache: null, currentlyEdited: false }
-  },
-  methods: {
-    editProduct: function(product) {
-      this.beforeEditCache = product.name;
-      this.currentlyEdited = true;
-    },
-    doneEdit: function(product) {
-      if (!this.currentlyEdited) {
-        return
-      }
-      this.currentlyEdited = false;
-      product.name = product.name.trim();
-      if (!product.name) {
-        this.removeProduct();
-      }
-    },
-    cancelEdit: function(product) {
-      if (!this.currentlyEdited) {
-        return
-      }
-      this.currentlyEdited = null;
-
-      product.name = this.beforeEditCache
-    }
-  }
+Vue.component('dialog-modal', {
+  template: '#dialog-template',
+  props: ['product']
 })
-
 
 var app = new Vue({
   el: "#cadabra",
@@ -39,18 +11,21 @@ var app = new Vue({
     products: [],
     resource_url: '/products?limit=10',
     loading: false,
-    currentlyEdited: null,
-    beforeEditCache: '',
     listingMethods: [
       {name: "id", text: "sort by id"},
       {name: "price", text: "sort by price"},
     ],
-    selectedOrdering: "id"
+    selectedOrdering: "id",
+    showModal: false,
+    currentlyEditedProduct: null
   },
   created: function() {
     this.load();
   },
   methods: {
+    emptyProduct: function() {
+      return {name: "", description: "", image_url: "", "price": 0};
+    },
     onScroll: function(event) {
       var container = event.target,
         list = container.firstElementChild;
@@ -60,7 +35,7 @@ var app = new Vue({
         listHeight = list.offsetHeight;
 
       var heightDiff = listHeight - containerHeight;
-      var reachedBottom = heightDiff <= scrollTop
+      var reachedBottom = heightDiff <= scrollTop;
 
       if (!this.loading && reachedBottom) {
           this.load()

@@ -8,19 +8,49 @@
     </head>
     <body>
 
-      <template id='editable-field'>
-        <div class="view" v-if="!currentlyEdited">
-          <label class="name" @dblclick="editProduct(product)">{{product.name}}</label>
-          <button class="destroy">x</button>
+      <template id='dialog-template'>
+        <div class="dialog">
+          <div class="dialog-overlay" @click="$emit('close')"></div>
+          <div class="dialog-content">
+            <div class="dialog-body">
+              <div class="dialog-fields">
+                <div class="dialog-row">
+                  <div class="dialog-label">Name:</div>
+                  <div class="dialog-labeled">
+                    <input class="dialog-input" v-model="product.name"></input>
+                  </div>
+                </div>
+                <div class="dialog-row">
+                  <div class="dialog-label">Price:</div>
+                  <div class="dialog-labeled">
+                    <input class="dialog-input" v-model="product.price"></input>
+                  </div>
+                </div>
+                <div class="dialog-row">
+                  <div class="dialog-label">Image url:</div>
+                  <div class="dialog-labeled">
+                    <input class="dialog-input" v-model="product.image_url"></input>
+                  </div>
+                </div>
+                <div class="dialog-row">
+                  <div class="dialog-label">Description:</div>
+                  <div class="dialog-labeled">
+                    <textarea class="dialog-text-area" v-model="product.description"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="dialog-footer">
+                <button class="dialog-button" @click="$emit('close')">Cancel</button>
+                <button class="dialog-button" @click="$emit('close')">Confirm</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <input class="edit" type="text" v-else v-model="product.name"
-         @blur="doneEdit(product)"
-         @keyup.enter="doneEdit(product)"
-         @keyup.esc="cancelEdit(product)"/>
       </template>
 
 
         <div id="cadabra" @scroll="onScroll">
+          <dialog-modal v-if="showModal" :product="currentlyEditedProduct" @close="showModal = false"></dialog-modal>
           <div class="toolbar">
             <ul class="sorting_tabs">
               <li class="sorting_tab"
@@ -28,16 +58,35 @@
                   @click="selectOrdering(method)"
                   :class="{active: method.name == selectedOrdering}">{{method.text}}</li>
             </ul>
+            <div class='button-container'>
+              <button class='add_product' @click="currentlyEditedProduct = emptyProduct(); showModal = true"></button>
+            </div>
           </div>
           <div class="list_container">
             <ul class="product_list">
               <li v-for="p in products"
                  class="list_item"
-                 :key="p.id"
-                 :class="{editing: currentlyEdited == p}">
-                 <editable-field :product.sync=p></editable-field>
-                  <img :src=p.image_url class="product_image">
-                  <div class="description-view">{{p.description}}</div>
+                 :key="p.id">
+                 <div class="product-details">
+                   <!-- <img :src=p.image_url class="product_image"> -->
+                   <div class="product-text">
+                     <label class="product-name">{{p.name}}</label>
+                     <br>
+                     <label class="product-price">{{p.price}}</label>
+                     <br>
+                     <label class="product-description">{{p.description}}</label>
+                   </div>
+                   <div class="product_controls">
+                     <div class='button-container'>
+                       <button class='edit-button' @click="currentlyEditedProduct = p; showModal = true"></button>
+                     </div>
+                     <div class='button-container destroy-button-container'>
+                       <button class="destroy"></button>
+                     </div>
+                   </div>
+                 </div>
+
+
                 </li>
             </ul>
           </div>
