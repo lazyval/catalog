@@ -5,9 +5,21 @@
         <title>Slim 3</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <link href="style.css" rel='stylesheet' type='text/css'>
-
     </head>
     <body>
+
+      <template id='editable-field'>
+        <div class="view" v-if="!currentlyEdited">
+          <label class="name" @dblclick="editProduct(product)">{{product.name}}</label>
+          <button class="destroy">x</button>
+        </div>
+        <input class="edit" type="text" v-else v-model="product.name"
+         @blur="doneEdit(product)"
+         @keyup.enter="doneEdit(product)"
+         @keyup.esc="cancelEdit(product)"/>
+      </template>
+
+
         <div id="cadabra" @scroll="onScroll">
           <div class="toolbar">
             <ul class="sorting_tabs">
@@ -23,14 +35,7 @@
                  class="list_item"
                  :key="p.id"
                  :class="{editing: currentlyEdited == p}">
-                 <div class="view" v-if="p != currentlyEdited">
-                   <label class="name" @dblclick="editProduct(p)">{{p.name}}</label>
-                   <button class="destroy">x</button>
-                 </div>
-                 <input class="edit" type="text" v-else v-model="p.name"
-                  @blur="doneEdit(p)"
-                  @keyup.enter="doneEdit(p)"
-                  @keyup.esc="cancelEdit(p)"/>
+                 <editable-field :product.sync=p></editable-field>
                   <img :src=p.image_url class="product_image">
                   <div class="description-view">{{p.description}}</div>
                 </li>

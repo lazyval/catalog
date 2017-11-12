@@ -1,5 +1,37 @@
 Vue.config.performance = true
 
+Vue.component('editable-field', {
+  template: '#editable-field',
+  props: ['product'],
+  data: function() {
+    return { beforeEditCache: null, currentlyEdited: false }
+  },
+  methods: {
+    editProduct: function(product) {
+      this.beforeEditCache = product.name;
+      this.currentlyEdited = true;
+    },
+    doneEdit: function(product) {
+      if (!this.currentlyEdited) {
+        return
+      }
+      this.currentlyEdited = false;
+      product.name = product.name.trim();
+      if (!product.name) {
+        this.removeProduct();
+      }
+    },
+    cancelEdit: function(product) {
+      if (!this.currentlyEdited) {
+        return
+      }
+      this.currentlyEdited = null;
+
+      product.name = this.beforeEditCache
+    }
+  }
+})
+
 
 var app = new Vue({
   el: "#cadabra",
@@ -53,28 +85,6 @@ var app = new Vue({
       this.products = [];
       this.resource_url = '/products?limit=10&order_by=' + method.name;
       this.load();
-    },
-    editProduct: function(product) {
-      this.beforeEditCache = product.name;
-      this.currentlyEdited = product;
-    },
-    doneEdit: function(product) {
-      if (!this.currentlyEdited) {
-        return
-      }
-      this.currentlyEdited = null;
-      product.name = product.name.trim();
-      if (!product.name) {
-        this.removeProduct();
-      }
-    },
-    cancelEdit: function(product) {
-      if (!this.currentlyEdited) {
-        return
-      }
-      this.currentlyEdited = null;
-
-      product.name = this.beforeEditCache
     }
   }
 })
