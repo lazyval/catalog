@@ -41,7 +41,7 @@
               </div>
               <div class="dialog-footer">
                 <button class="dialog-button" @click="$emit('close')">Cancel</button>
-                <button class="dialog-button" @click="$emit('close')">Confirm</button>
+                <button class="dialog-button" @click="onSave()">Confirm</button>
               </div>
             </div>
           </div>
@@ -50,7 +50,11 @@
 
 
         <div id="cadabra" @scroll="onScroll">
-          <dialog-modal v-if="showModal" :product="currentlyEditedProduct" @close="showModal = false"></dialog-modal>
+          <dialog-modal v-if="showModal" :product="currentlyEditedProduct"
+              @close="showModal = false"
+              @new-product="onNewProduct"
+              @product-update="onProductUpdate"
+              ></dialog-modal>
           <div class="toolbar">
             <ul class="sorting_tabs">
               <li class="sorting_tab"
@@ -81,7 +85,7 @@
                        <button class='edit-button' @click="currentlyEditedProduct = p; showModal = true"></button>
                      </div>
                      <div class='button-container destroy-button-container'>
-                       <button class="destroy"></button>
+                       <button class="destroy" @click="onProductDelete(p)"></button>
                      </div>
                    </div>
                  </div>

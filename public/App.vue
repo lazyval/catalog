@@ -2,7 +2,18 @@ Vue.config.performance = true
 
 Vue.component('dialog-modal', {
   template: '#dialog-template',
-  props: ['product']
+  props: ['product', 'alreadyExists'],
+  methods: {
+    onSave: function () {
+      alreadyExists = 'id' in this.product;
+      if (alreadyExists) {
+        this.$emit('product-update', this.product)
+      } else {
+        this.$emit('new-product', this.product)
+      }
+      this.$emit('close')
+    }
+  }
 })
 
 var app = new Vue({
@@ -51,7 +62,7 @@ var app = new Vue({
           this.resource_url = json.next_page;
           this.loading = false;
       }, function(error) {
-        console.log(error)
+        console.error(error)
         this.loading = false;
       })
     },
@@ -60,6 +71,29 @@ var app = new Vue({
       this.products = [];
       this.resource_url = '/products?limit=10&order_by=' + method.name;
       this.load();
+    },
+    onNewProduct: function(product) {
+      this.$http.post('/products', product).then(function(response) {
+          var location = response.headers.get('location');
+          var newId = parseInt(location.split('/').pop());
+          product['id'] = newId;
+          this.products.unshift(product);
+      }, function (error) {
+        console.error(error)
+      })
+    },
+    onProductUpdate: function(product) {
+      console.error('Implement me!');
+    },
+    onProductDelete: function(product) {
+      this.$http.delete('/products/' + product.id).then(function(response) {
+        var id = this.products.indexOf(product);
+        if (id > -1) {
+          this.products.splice(id, 1);
+        }
+      }, function (error) {
+        console.error("Failed to delete element: ", error);
+      })
     }
   }
 })
