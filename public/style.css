@@ -84,17 +84,18 @@ div.product-details {
   padding: 12px;
 }
 
-div.product_text {
-  display: flex;
-  flex-direction: column;
+div.product-text {
+  flex: 70;
 }
 
 div.product_controls {
+  flex: 5;
   display: flex;
   flex-direction: row;
 }
 
 div.image-container {
+  flex: 25;
   margin: 12px;
   margin-right: 15px;
 }
