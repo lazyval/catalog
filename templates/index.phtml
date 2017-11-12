@@ -72,7 +72,9 @@
                  class="list_item"
                  :key="p.id">
                  <div class="product-details">
-                   <!-- <img :src=p.image_url class="product_image"> -->
+                   <div class="image-container">
+                     <img :src=p.image_url class="product_image">
+                   </div>
                    <div class="product-text">
                      <label class="product-name">{{p.name}}</label>
                      <br>

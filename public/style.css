@@ -94,12 +94,13 @@ div.product_controls {
   flex-direction: row;
 }
 
+div.image-container {
+  margin: 12px;
+  margin-right: 15px;
+}
+
 img.product_image {
-  display: block;
-  max-width: 300px%;
-  max-height: 300px%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 128px;
 }
 
 .name {
