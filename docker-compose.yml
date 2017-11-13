@@ -32,7 +32,3 @@ services:
              - 3603:3603
         volumes:
             - ./catalog_data:/docker-entrypoint-initdb.d
-
-    nginx:
-        image: nginx
-        
