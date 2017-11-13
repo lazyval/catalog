@@ -83,7 +83,12 @@ var app = new Vue({
       })
     },
     onProductUpdate: function(product) {
-      console.error('Implement me!');
+      this.$http.put('/products/' + product.id, product).then(function(response) {
+        console.debug('product successfully updated');
+      }, function (error) {
+        console.error('Failed to update product', product, error);
+      }
+    )
     },
     onProductDelete: function(product) {
       this.$http.delete('/products/' + product.id).then(function(response) {
