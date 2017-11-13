@@ -57,6 +57,26 @@ $app->post('/products', function (Request $request, Response $response, array $a
     ->withStatus(201);
 });
 
+$app->put('/products/{id}', function (Request $request, Response $response, array $args) {
+  $body_json = json_decode($request->getBody(), true);
+
+  $stmt = $this->get('database')
+    ->update(array(
+      "name" => $body_json['name'],
+      "image_url" => $body_json['image_url'],
+      "price" => $body_json['price'],
+      "description" => $body_json['description']))
+    ->table('product_listing')
+    ->where('id', '=', intval($args['id']));
+
+    $affectedRows = $stmt->execute();
+    if ($affectedRows > 0) {
+        return $response->withStatus(201);
+    } else {
+        return $response->withStatus(500);
+    }
+});
+
 $app->delete('/products/{id}', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
 
