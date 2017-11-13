@@ -119,18 +119,6 @@ button.add_product {
   opacity: .8;
 }
 
-button.destroy {
-  width: 100%;
-  height: 100%;
-  background: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%3E%3Cpath%20fill%3D%22%2391A8C4%22%20d%3D%22M8%206v-6h-2v6h-6v2h6v6h2v-6h6v-2h-6z%22%2F%3E%3C%2Fsvg%3E')
-    top no-repeat;
-  display: block;
-  outline: 0;
-  cursor: pointer;
-  border: 0;
-  opacity: .8;
-  transform: rotate(45deg);
-}
 
 button.add_product:hover {
   opacity: 1;
@@ -146,20 +134,31 @@ div.button-container {
   padding: 18px 15px 16px 10px;
 }
 
-div.destroy-button-container {
-  float: right;
-}
-
 button.edit-button {
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%3E%3Cpath%20fill%3D%22%2391A8C4%22%20d%3D%22M8%206v-6h-2v6h-6v2h6v6h2v-6h6v-2h-6z%22%2F%3E%3C%2Fsvg%3E')
+  margin-top: 1px;
+  background: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20style%3D%22%22%3E%3Crect%20id%3D%22backgroundrect%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20x%3D%220%22%20y%3D%220%22%20fill%3D%22none%22%20stroke%3D%22none%22%20style%3D%22%22%20class%3D%22%22%2F%3E%3Cg%20class%3D%22currentLayer%22%20style%3D%22%22%3E%3Ctitle%3ELayer%201%3C%2Ftitle%3E%3Cg%20id%3D%22svg_1%22%20fill%3D%22none%22%20class%3D%22%22%3E%3Cpath%20id%3D%22svg_3%22%20fill%3D%22%23828A99%22%20d%3D%22m1.00000011920929%2C9.099999621510506%20l2%2C2%20l-0.5%2C0.5%20l-2.2%2C0.4%20c-0.2%2C0.1%20-0.3000000000000003%2C0%20-0.2%2C-0.2%20l0.4%2C-2.2%20l0.5%2C-0.5%20zm1%2C-1%20l7.7%2C-7.7%20c0.4%2C-0.4%201%2C-0.4%201.4%2C0%20l0.6000000000000006%2C0.6000000000000006%20c0.4%2C0.4%200.4%2C1%200%2C1.4%20l-7.7%2C7.7%20l-2%2C-2%20z%22%2F%3E%3C%2Fg%3E%3Cpath%20fill%3D%22none%22%20fill-opacity%3D%221%22%20stroke%3D%22%23dadada%22%20stroke-opacity%3D%221%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%22none%22%20stroke-linejoin%3D%22miter%22%20stroke-linecap%3D%22butt%22%20stroke-dashoffset%3D%22%22%20fill-rule%3D%22nonzero%22%20opacity%3D%221%22%20marker-start%3D%22%22%20marker-mid%3D%22%22%20marker-end%3D%22%22%20d%3D%22M0.6938775510203996%2C0.816326530612244L0.4489795918367321%2C0.408163265306122%22%20id%3D%22svg_5%22%20class%3D%22%22%2F%3E%3Cpath%20fill%3D%22none%22%20fill-opacity%3D%221%22%20stroke%3D%22%23dadada%22%20stroke-opacity%3D%221%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%22none%22%20stroke-linejoin%3D%22miter%22%20stroke-linecap%3D%22butt%22%20stroke-dashoffset%3D%22%22%20fill-rule%3D%22nonzero%22%20opacity%3D%221%22%20marker-start%3D%22%22%20marker-mid%3D%22%22%20marker-end%3D%22%22%20d%3D%22M11.714285714285708%2C11.755102040816327L11.632653061224481%2C12.08163265306122%22%20id%3D%22svg_7%22%20class%3D%22%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')
     top no-repeat;
   display: block;
   outline: 0;
   cursor: pointer;
   border: 0;
   opacity: .8;
+}
+
+button.destroy {
+  width: 100%;
+  height: 100%;
+  background:
+  url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2014%2014%22%3E%3Cpath%20fill%3D%22%2391A8C4%22%20d%3D%22M8%206v-6h-2v6h-6v2h6v6h2v-6h6v-2h-6z%22%2F%3E%3C%2Fsvg%3E')
+    top no-repeat;
+  display: block;
+  outline: 0;
+  cursor: pointer;
+  border: 0;
+  opacity: .8;
+  transform: rotate(45deg);
 }
 
 div.dialog-overlay {
