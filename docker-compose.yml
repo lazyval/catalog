@@ -17,6 +17,7 @@ services:
             DATABASE_URL: "mysql:host=mysql;dbname=products"
             DATABASE_USER: "root"
             DATABASE_PWD: ""
+            MEMCACHEDCLOUD_SERVERS: "memcached:11211"
         ports:
             - 8080:8080
         volumes:
@@ -32,3 +33,8 @@ services:
              - 3603:3603
         volumes:
             - ./catalog_data:/docker-entrypoint-initdb.d
+
+    memcached:
+        image: memcached
+        ports:
+          - 11211:11211
